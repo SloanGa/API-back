@@ -1,8 +1,6 @@
-import { Request, Response, Router } from "express";
+import { Router } from "express";
+import { justifyPlainText } from "../controllers/justify.controller";
 
 export const justifyRoutes = Router();
 
-justifyRoutes.post("/", (req: Request, res: Response) => {
-  console.log(req.body);
-  res.end();
-});
+justifyRoutes.post("/", justifyPlainText);

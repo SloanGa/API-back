@@ -4,7 +4,7 @@
   "description": "Exercice back-end TicTacTrip",
   "main": "./dist/app.js",
   "scripts": {
-    "start": "nodemon ./dist/app.js",
+    "dev": "nodemon ./dist/app.js",
     "build": "tsc -w"
   },
   "keywords": [],
@@ -15,6 +15,7 @@
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
+    "dotenv": "^16.4.5",
     "nodemon": "^3.1.7",
     "ts-watch": "^1.0.8",
     "typescript": "^5.6.3"

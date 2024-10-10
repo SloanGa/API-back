@@ -4,9 +4,10 @@ import { router } from "./routes/routes";
 
 dotenv.config();
 
-const app = express();
+export const app = express();
 
 app.use(express.text());
+app.use(express.json());
 
 app.use("/api", router);
 

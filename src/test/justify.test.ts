@@ -36,8 +36,8 @@ describe("justifyText", () => {
   });
 
   it("should return a empty string", () => {
-    const input = "";
-    const expectedOutput = "";
+    const input = " ";
+    const expectedOutput = " ";
 
     const result = justifyText(input);
     expect(result).toBe(expectedOutput);

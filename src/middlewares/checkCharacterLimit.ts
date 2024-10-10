@@ -17,7 +17,7 @@ export const checkCharacterLimit = async (req: Request, res: Response, next: Nex
     // If user find, check character limit, if >80k, return 402, else, update characterUsage for the next request
     if (userData) {
       const parseUserData: IUserData = JSON.parse(userData);
-     
+
       if (parseUserData.currentCharacter + textLength > 80000) {
         res.status(402).json({ message: "Character limit exceeded for today" });
         return;
@@ -25,7 +25,7 @@ export const checkCharacterLimit = async (req: Request, res: Response, next: Nex
 
       parseUserData.currentCharacter += textLength;
 
-      // update user on redis with good infos
+      // update user on redis with correct infos
       await redisClient.set(`user:${email}`, JSON.stringify(parseUserData));
 
       // if not user found, create user on redis and init character usage base to textLength

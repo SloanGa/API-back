@@ -1,6 +1,10 @@
 import { createClient } from "redis";
+import dotenv from "dotenv";
 
-export const redisClient = createClient();
+dotenv.config();
+export const redisClient = createClient({
+  url: process.env.REDIS_URL || "redis://localhost:6379",
+});
 
 redisClient.connect().then(() => {
   console.log("connected to the database!");

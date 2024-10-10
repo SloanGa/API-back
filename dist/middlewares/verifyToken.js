@@ -8,7 +8,7 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const verifyToken = (req, res, next) => {
     const authorization = req.headers.authorization;
     if (!authorization) {
-        res.status(403).json({ message: "Missing authorization token" });
+        res.status(401).json({ message: "Missing authorization token" });
         return;
     }
     const token = authorization.split(" ")[1];
@@ -17,7 +17,7 @@ const verifyToken = (req, res, next) => {
         req.email = jwtContent.email;
     }
     catch (err) {
-        res.status(403).json({ message: "Invalid or expired token" });
+        res.status(401).json({ message: "Invalid or expired token" });
         return;
     }
     next();

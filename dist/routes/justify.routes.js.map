@@ -1,1 +1,1 @@
-{"version":3,"file":"justify.routes.js","sourceRoot":"","sources":["../../src/routes/justify.routes.ts"],"names":[],"mappings":";;;AAAA,qCAAiC;AACjC,0EAAqE;AACrE,4DAAyD;AAE5C,QAAA,aAAa,GAAG,IAAA,gBAAM,GAAE,CAAC;AAEtC,qBAAa,CAAC,IAAI,CAAC,GAAG,EAAE,yBAAW,EAAE,qCAAgB,CAAC,CAAC"}
+{"version":3,"file":"justify.routes.js","sourceRoot":"","sources":["../../src/routes/justify.routes.ts"],"names":[],"mappings":";;;AAAA,qCAAiC;AACjC,0EAAqE;AACrE,4DAAyD;AACzD,4EAAyE;AAE5D,QAAA,aAAa,GAAG,IAAA,gBAAM,GAAE,CAAC;AAEtC,qBAAa,CAAC,IAAI,CAAC,GAAG,EAAE,yBAAW,EAAE,yCAAmB,EAAE,qCAAgB,CAAC,CAAC"}

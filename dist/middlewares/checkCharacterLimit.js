@@ -26,6 +26,10 @@ const checkCharacterLimit = (req, res, next) => __awaiter(void 0, void 0, void 0
             yield client_1.redisClient.set(`user:${email}`, JSON.stringify(parseUserData));
         }
         else {
+            if (textLength > 80000) {
+                res.status(402).json({ message: "Character limit exceeded for today" });
+                return;
+            }
             const newUserData = {
                 email: email,
                 currentCharacter: textLength,

@@ -17,6 +17,7 @@ export const verifyToken = (req: Request, res: Response, next: NextFunction) => 
     };
 
     req.email = jwtContent.email;
+    req.token = token;
   } catch (err) {
     res.status(401).json({ message: "Invalid or expired token" });
     return;

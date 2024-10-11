@@ -15,6 +15,7 @@ const verifyToken = (req, res, next) => {
     try {
         const jwtContent = jsonwebtoken_1.default.verify(token, process.env.SECRET_KEY);
         req.email = jwtContent.email;
+        req.token = token;
     }
     catch (err) {
         res.status(401).json({ message: "Invalid or expired token" });

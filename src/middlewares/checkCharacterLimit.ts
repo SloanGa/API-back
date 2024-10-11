@@ -7,12 +7,12 @@ interface IUserData {
 }
 
 export const checkCharacterLimit = async (req: Request, res: Response, next: NextFunction) => {
-  const email = req.email;
+  const { email, token } = req;
   const textLength = req.body.length;
 
   try {
-    // Find user with email : req.email
-    const userData = await redisClient.get(`user:${email}`);
+    // Find user with email && token
+    const userData = await redisClient.get(`user:${email}:${token}`);
 
     // If user found, check character limit, if >80k, return 402, else, update characterUsage for the next request
     if (userData) {
@@ -26,7 +26,7 @@ export const checkCharacterLimit = async (req: Request, res: Response, next: Nex
       parseUserData.currentCharacter += textLength;
 
       // update user on redis with correct infos
-      await redisClient.set(`user:${email}`, JSON.stringify(parseUserData));
+      await redisClient.set(`user:${email}:${token}`, JSON.stringify(parseUserData));
 
       // if not user found, create user on redis and init character usage base to textLength
       // if textLength exceed 80 000 for the first time return 402
@@ -41,7 +41,7 @@ export const checkCharacterLimit = async (req: Request, res: Response, next: Nex
         currentCharacter: textLength,
       };
 
-      await redisClient.set(`user:${email}`, JSON.stringify(newUserData), {
+      await redisClient.set(`user:${email}:${token}`, JSON.stringify(newUserData), {
         EX: 86400, // 24 hours
       });
     }

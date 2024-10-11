@@ -12,10 +12,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.checkCharacterLimit = void 0;
 const client_1 = require("../database/client");
 const checkCharacterLimit = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const email = req.email;
+    const { email, token } = req;
     const textLength = req.body.length;
     try {
-        const userData = yield client_1.redisClient.get(`user:${email}`);
+        const userData = yield client_1.redisClient.get(`user:${email}:${token}`);
         if (userData) {
             const parseUserData = JSON.parse(userData);
             if (parseUserData.currentCharacter + textLength > 80000) {
@@ -23,7 +23,7 @@ const checkCharacterLimit = (req, res, next) => __awaiter(void 0, void 0, void 0
                 return;
             }
             parseUserData.currentCharacter += textLength;
-            yield client_1.redisClient.set(`user:${email}`, JSON.stringify(parseUserData));
+            yield client_1.redisClient.set(`user:${email}:${token}`, JSON.stringify(parseUserData));
         }
         else {
             if (textLength > 80000) {
@@ -34,7 +34,7 @@ const checkCharacterLimit = (req, res, next) => __awaiter(void 0, void 0, void 0
                 email: email,
                 currentCharacter: textLength,
             };
-            yield client_1.redisClient.set(`user:${email}`, JSON.stringify(newUserData), {
+            yield client_1.redisClient.set(`user:${email}:${token}`, JSON.stringify(newUserData), {
                 EX: 86400,
             });
         }
